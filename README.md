@@ -14,3 +14,24 @@ oc create -f pvc.yml -n <namespace>
 ```
 oc create -f pod.yml -n <namespace>
 ```
+
+
+# NFS Export
+1. Both NFS and client must be in same domain. In /etc/idmapd.conf:  
+```
+domain = localdomain.com
+```  
+2. Disable idmap:
+```
+echo 'Y' > /sys/module/nfsd/parameters/nfs4_disable_idmapping
+```  
+3. The export:
+```
+/openshift *(rw,sync,root_squash)
+```  
+
+Original doc:  
+https://bugzilla.redhat.com/show_bug.cgi?id=1402257  
+https://docs.openshift.org/latest/install_config/persistent_storage/persistent_storage_nfs.html#nfs-additional-config-and-troubleshooting  
+
+
