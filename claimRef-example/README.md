@@ -10,10 +10,9 @@ spec:
   - ReadWriteOnce
   capacity:
     storage: 5Gi
-  nfs:
-    path: /mnt/exports/asb
-    server: 192.168.10.5
-  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: /registry
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     apiVersion: v1
     kind: PersistentVolumeClaim
